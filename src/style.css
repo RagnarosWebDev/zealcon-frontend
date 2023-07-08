@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Golos Text', sans-serif;
+}
+:root {
+    --primary-black: #2B2B2B;
+    --primary-gray: #ECECEC;
+    --primary-primary: #009CDE;
+}
