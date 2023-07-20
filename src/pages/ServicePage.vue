@@ -65,7 +65,7 @@ export default {
       <div
         style="
           width: 100%;
-          height: 720px;
+
           position: absolute;
           background: linear-gradient(
             270deg,
@@ -74,13 +74,13 @@ export default {
           );
           z-index: 100;
         "
+        class="main-gr"
       ></div>
       <div
+        class="main-bottom-gr"
         style="
           width: 100%;
-          height: 150px;
           position: absolute;
-          margin-top: 570px;
           background: linear-gradient(
             rgba(248, 248, 248, 0),
             rgba(248, 248, 248, 1)
@@ -101,7 +101,7 @@ export default {
       "
       class="btn"
     >
-      Полный список услуг
+      Все услуги
     </button>
     <div class="title">{{ service.title }}</div>
 
@@ -144,11 +144,29 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 720px;
+  height: 640px;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+.main-gr {
+  height: 640px;
+}
+.main-bottom-gr {
+  margin-top: 490px;
+  height: 150px;
+}
+
+@media (max-width: 800px) {
+  .main,
+  .main-gr {
+    height: 500px;
+  }
+  .main-bottom-gr {
+    margin-top: 350px;
+  }
+}
+
 .title {
   margin-top: 40px;
   font-size: 40px;

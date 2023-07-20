@@ -49,98 +49,98 @@ export default {
 }
 </script>
 <template>
-  <div class="back" id="form">
-    <div class="calculator-form">
-      <div class="title">{{ langs.calcForm.value }}</div>
-      <div class="form">
-        <div class="input-data">
-          <div class="label">
-            {{ langs.formFio.value }}
-            <div class="blue">*</div>
+  <div id="form" style="scroll-margin: 50px">
+    <div class="back">
+      <div class="calculator-form">
+        <div class="title">{{ langs.calcForm.value }}</div>
+        <div class="form">
+          <div class="input-data">
+            <div class="label">
+              {{ langs.formFio.value }}
+              <div class="blue">*</div>
+            </div>
+            <input
+              name="fio"
+              v-model="fio"
+              :placeholder="langs.formFioExample.value"
+            />
           </div>
-          <input
-            name="fio"
-            v-model="fio"
-            :placeholder="langs.formFioExample.value"
-          />
-        </div>
-        <div class="input-data">
-          <div class="label">
-            {{ langs.formMail.value }}
-            <div class="blue">*</div>
+          <div class="input-data">
+            <div class="label">
+              {{ langs.formMail.value }}
+              <div class="blue">*</div>
+            </div>
+            <input
+              name="email"
+              v-model="email"
+              :placeholder="langs.formMailExample.value"
+            />
           </div>
-          <input
-            name="email"
-            v-model="email"
-            :placeholder="langs.formMailExample.value"
-          />
+          <div class="input-data">
+            <div class="label">{{ langs.formPhone.value }}</div>
+            <input
+              name="phone"
+              v-model="phone"
+              :placeholder="langs.formPhoneExample.value"
+            />
+          </div>
+          <div class="input-data">
+            <div class="label">{{ langs.formCountry.value }}</div>
+            <input
+              name="country"
+              v-model="country"
+              :placeholder="langs.formCountryExample.value"
+            />
+          </div>
+          <div class="input-data">
+            <div class="label">{{ langs.formDescExample.value }}</div>
+            <input
+              name="description"
+              v-model="description"
+              placeholder="Описание"
+            />
+          </div>
+          <div class="input-data">
+            <div class="label">{{ langs.formSum.value }}</div>
+            <input
+              name="sum"
+              v-model="sum"
+              :placeholder="langs.formSumExample.value"
+            />
+          </div>
+          <div class="input-data">
+            <div class="label">{{ langs.formCode.value }}</div>
+            <input
+              name="code"
+              v-model="code"
+              :placeholder="langs.formCodeExample.value"
+            />
+          </div>
+          <div class="input-data">
+            <div class="label">{{ langs.formOutSource.value }}</div>
+            <input
+              name="outSourcing"
+              v-model="outSourcing"
+              :placeholder="langs.formOutSourceExample.value"
+            />
+          </div>
+          <div class="input-data">
+            <div class="label">{{ langs.formWeight.value }}</div>
+            <input name="weight" v-model="weight" placeholder="10000/10" />
+          </div>
+          <div id="req-mobile" class="required-field">
+            <div class="blue">*</div>
+            <div class="required">{{ langs.formReq.value }}</div>
+          </div>
+          <button class="submit" @click="add">
+            {{ langs.formCalc.value }}
+          </button>
         </div>
-        <div class="input-data">
-          <div class="label">{{ langs.formPhone.value }}</div>
-          <input
-            name="phone"
-            v-model="phone"
-            :placeholder="langs.formPhoneExample.value"
-          />
-        </div>
-        <div class="input-data">
-          <div class="label">{{ langs.formCountry.value }}</div>
-          <input
-            name="country"
-            v-model="country"
-            :placeholder="langs.formCountryExample.value"
-          />
-        </div>
-        <div class="input-data">
-          <div class="label">{{ langs.formDescExample.value }}*</div>
-          <input
-            name="description"
-            v-model="description"
-            :placeholder="langs.formDescExample.value"
-          />
-        </div>
-        <div class="input-data">
-          <div class="label">{{ langs.formSum.value }}</div>
-          <input
-            name="sum"
-            v-model="sum"
-            :placeholder="langs.formSumExample.value"
-          />
-        </div>
-        <div class="input-data">
-          <div class="label">{{ langs.formCode.value }}</div>
-          <input
-            name="code"
-            v-model="code"
-            :placeholder="langs.formCodeExample.value"
-          />
-        </div>
-        <div class="input-data">
-          <div class="label">{{ langs.formOutSource.value }}</div>
-          <input
-            name="outSourcing"
-            v-model="outSourcing"
-            :placeholder="langs.formOutSourceExample.value"
-          />
-        </div>
-        <div class="input-data">
-          <div class="label">{{ langs.formWeight.value }}</div>
-          <input
-            name="weight"
-            v-model="weight"
-            :placeholder="langs.formWeight.value"
-          />
-        </div>
-        <div id="req-mobile" class="required-field">
+
+        <div id="req-desktop" class="required-field">
           <div class="blue">*</div>
           <div class="required">{{ langs.formReq.value }}</div>
         </div>
-        <button class="submit" @click="add">{{ langs.formCalc.value }}</button>
-      </div>
-
-      <div id="req-desktop" class="required-field">
-        <div class="blue">*</div>
-        <div class="required">{{ langs.formReq.value }}</div>
       </div>
     </div>
   </div>

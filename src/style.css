@@ -8,3 +8,6 @@
     --primary-gray: #ECECEC;
     --primary-primary: #009CDE;
 }
+button:hover{
+    cursor: pointer;
+}

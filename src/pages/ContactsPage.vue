@@ -17,12 +17,12 @@ import ContactPageItem from '../components/ContactPageItem.vue'
       </ContactPageItem>
       <ContactPageItem title="Электронная почта" image="/email_gray.svg">
         <a class="sub-title" href="mailto:contact@zealcon.ru"
-          >contact@zealcon.ru</a
+          >info@zealcon.ru</a
         >
       </ContactPageItem>
       <ContactPageItem title="Юридический адрес" image="/geo_gray.svg">
         <a class="sub-title"
-          >Красноказарменная 17а, стр. 1, 111116, Москва, Россия</a
+          >м. Авиамоторная Красноказарменная 17а, стр.1, 111116 Москва</a
         >
       </ContactPageItem>
     </div>
