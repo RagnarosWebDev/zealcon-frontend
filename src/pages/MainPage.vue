@@ -10,13 +10,33 @@ import { storeToRefs } from 'pinia'
 const langs = storeToRefs(useLanguage())
 </script>
 <script lang="ts">
-import { router } from '../router'
-
 export default {
   name: 'MainPage',
   methods: {
     toForm() {
-      router.push({ hash: '#form' })
+      document.getElementById('form')?.scrollIntoView({
+        behavior: 'smooth',
+      })
+
+      /*const localPosition = document
+        .getElementById('form')
+        ?.getBoundingClientRect()?.top
+      if (localPosition == null) return
+      const styles: any = document.body.style
+      const isSafari = /^((?!chrome|android).)*safari/i.test(
+        navigator.userAgent,
+      )
+      if (isSafari) {
+        scrollTo({
+          top: (localPosition + window.scrollY) * styles.zoom,
+          behavior: 'smooth',
+        })
+        return
+      }
+      scrollTo({
+        top: (localPosition + window.scrollY) * styles.zoom,
+        behavior: 'smooth',
+      })*/
     },
   },
 }

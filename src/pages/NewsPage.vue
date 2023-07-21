@@ -4,8 +4,10 @@ import { baseURL } from '../core/api'
 </script>
 
 <script lang="ts">
-import { allNews, countNews } from '../core/api'
+import { allNews, countNews, deleteNews } from '../core/api'
 import { useToast } from 'vue-toastification'
+import { useUserStore } from '../storage/user.storage.ts'
+import { router } from '../router'
 
 export default {
   name: 'NewsData',
@@ -47,6 +49,15 @@ export default {
           useToast().error('Ошибка подгрузки новостей')
         })
     },
+    removeNews(id: number) {
+      console.log(id)
+      deleteNews(useUserStore().token, id).then((e) => {
+        useToast().success('Новость успешно удалена')
+      })
+    },
+    edit(id: number) {
+      router.push({ path: '/editNews', query: { id: id } })
+    },
   },
 }
 </script>
@@ -85,6 +96,19 @@ export default {
                 {{ NewsData.getDateInfo(item).day }}
                 {{ NewsData.getDateInfo(item).month }}
               </div>
+            </div>
+
+            <div
+              v-if="useUserStore().token"
+              style="
+                display: flex;
+                margin-left: auto;
+                margin-right: 30px;
+                margin-top: 20px;
+              "
+            >
+              <button @click="removeNews(item.id)">Удалить</button>
+              <button @click="edit(item.id)">Редактировать</button>
             </div>
           </div>
         </div>

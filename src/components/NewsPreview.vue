@@ -109,14 +109,9 @@ export default {
       style="display: flex; flex-direction: column"
     >
       <div style="width: 100%; margin-bottom: 20px">
-        <swiper :slides-per-view="1.5" space-between="20">
+        <swiper :slides-per-view="1.5" space-between="0">
           <swiper-slide v-for="item in fourthOrMax()" :key="item.id">
-            <div
-              class="swiper-news-container"
-              :style="{
-                'margin-left': `${fourthOrMax().indexOf(item) == 0 ? 20 : 0}px`,
-              }"
-            >
+            <div class="swiper-news-container" style="margin-left: 20px">
               <div
                 style="
                   border-radius: 12px;
@@ -218,6 +213,7 @@ export default {
 }
 .image-news-item {
   height: 250px;
+  width: 174px;
   border-radius: 10px;
   grid-row: 1/2;
   grid-column: 1/2;

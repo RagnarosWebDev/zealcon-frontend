@@ -2,9 +2,9 @@
 
 <template>
   <div class="container">
-    <div class="title">О нас</div>
+    <div class="title">О компании</div>
     <div class="container-image">
-      <div class="container-texts">
+      <div class="container-texts" style="margin-right: 20px">
         <p>
           Компания Zealcon была основана командой профессионалов с 15-летним
           опытом работы в логистике и внешней торговле.

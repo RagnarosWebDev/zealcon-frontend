@@ -60,7 +60,7 @@ export default {
       <div class="title">{{ service.title }}</div>
       <ul class="description">
         <li
-          style="margin-bottom: 5px"
+          style="margin-bottom: 10px"
           v-for="item of service.advantages"
           :key="item"
           v-html="item"
@@ -94,16 +94,16 @@ export default {
 
 @media (min-width: 1000px) {
   .service-item:hover {
-    animation: anim 1s forwards;
+    animation: anim 0.75s forwards;
   }
 }
 
 @keyframes anim {
   0% {
-    background-size: 150%;
+    background-size: 100%;
   }
   100% {
-    background-size: 250%;
+    background-size: 150%;
   }
 }
 .description {

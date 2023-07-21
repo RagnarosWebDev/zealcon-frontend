@@ -35,7 +35,7 @@ export default {
 <template>
   <div class="about-companies">
     <div class="title">{{ langs.aboutUs.value }}</div>
-    <div class="companies-list" v-if="width > 800">
+    <div class="companies-list" v-if="width > 1000">
       <img src="/leo.png" alt="leo" id="leo" />
       <img src="/techno.png" alt="techno" />
       <img src="/cubolix.png" alt="cobolux" />
@@ -45,7 +45,7 @@ export default {
       <img src="/vision.png" alt="vision" />
       <img src="/auto.png" alt="auto" />
     </div>
-    <div class="swiper-container" v-if="width <= 800">
+    <div class="swiper-container" v-if="width <= 1000">
       <img class="swiper-nav back" id="back1" src="/arrow_front.svg" />
       <swiper
         class="swiper-1"
@@ -134,6 +134,7 @@ export default {
 }
 .companies-list img {
   margin-left: auto;
+  width: 300px;
   margin-right: auto;
 }
 @media (max-width: 800px) {

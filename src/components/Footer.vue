@@ -6,13 +6,13 @@ import { useLanguage } from '../storage/language.storage.ts'
 const langs = storeToRefs(useLanguage())
 </script>
 <script lang="ts">
-import { router } from '../router'
-
 export default {
   name: 'FooterD',
   methods: {
     toForm() {
-      router.push({ path: '/', hash: '#form' })
+      document.getElementById('form')?.scrollIntoView({
+        behavior: 'smooth',
+      })
     },
   },
 }
@@ -67,7 +67,7 @@ export default {
             link="mailto:info@zealcon.ru"
           />
           <ContactItem
-            link=""
+            link="/contacts"
             :value="langs.address.value"
             image="/place.svg"
             color="white"

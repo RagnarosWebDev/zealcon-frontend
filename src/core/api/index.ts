@@ -5,7 +5,7 @@ import { Ref } from 'vue'
 import { CreateFormDto, Form } from '../models/form.ts'
 import { LangItem } from '../models/lang-item.ts'
 
-const baseURL = 'https://estrelatest.ru/api'
+const baseURL = 'https://zealcon.ru/api'
 //const baseURL = 'http://localhost:3000/api'
 
 const allServices = () =>
@@ -31,6 +31,14 @@ const addForm = (form: CreateFormDto) =>
     method: 'post',
     url: `${baseURL}/forms/create`,
     data: form,
+  })
+const deleteNews = (token: string, id: number) =>
+  axios<FormData>({
+    method: 'get',
+    url: `${baseURL}/news/delete?id=${id}`,
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
   })
 
 const loginRequest = (login: string, password: string) =>
@@ -73,6 +81,25 @@ const editService = (
   })
 }
 
+const editNews = (
+  token: string,
+  title: string,
+  description: string,
+  id: number,
+) => {
+  return axios({
+    method: 'post',
+    url: `${baseURL}/news/edit`,
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+    data: {
+      title: title,
+      description: description,
+      id: id,
+    },
+  })
+}
 const addService = (
   token: string,
   title: string,
@@ -141,6 +168,17 @@ const editLang = (token: string, form: LangItem) =>
     data: form,
   })
 
+const getById = function (token: string, id: number) {
+  console.log(id)
+  return axios<NewsData>({
+    method: 'get',
+    url: `${baseURL}/news/getById?id=` + id,
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  })
+}
+
 export {
   baseURL,
   allServices,
@@ -155,4 +193,7 @@ export {
   addNews,
   allForms,
   allLangs,
+  deleteNews,
+  getById,
+  editNews,
 }
