@@ -7,9 +7,13 @@ import 'vue-toastification/dist/index.css'
 import Toast from 'vue-toastification'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
+const appEll = document.getElementById('app') as HTMLElement
 function resize() {
   const styles: any = document.body.style
-  styles.zoom = window.innerWidth <= 1450 ? 1 : window.innerWidth / 1920
+  const zoom = window.innerWidth <= 1450 ? 1 : window.innerWidth / 1920
+  styles.zoom = zoom
+
+  appEll.style.minHeight = 'calc(100vh / ' + zoom + ')'
 }
 window.onresize = resize
 

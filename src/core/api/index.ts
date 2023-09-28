@@ -65,19 +65,27 @@ const editService = (
   advantages: string[],
   text: string,
   id: number,
+  image,
+  image1,
 ) => {
+  const formData = new FormData()
+  formData.append('image', image)
+  formData.append('image1', image1)
+  formData.append('text', text)
+  formData.append('title', title)
+  formData.append('id', id + '')
+  for (const adv of advantages) {
+    formData.append('advantages', adv)
+  }
+
   return axios({
     method: 'post',
     url: `${baseURL}/services/edit`,
     headers: {
       Authorization: 'Bearer ' + token,
+      'Content-Type': 'multipart/form-data',
     },
-    data: {
-      title: title,
-      advantages: advantages,
-      text: text,
-      id: id,
-    },
+    data: formData,
   })
 }
 
@@ -86,18 +94,21 @@ const editNews = (
   title: string,
   description: string,
   id: number,
+  file,
 ) => {
+  const formData = new FormData()
+  if (file != null) formData.append('image', file)
+  formData.append('description', description)
+  formData.append('title', title)
+  formData.append('id', id + '')
   return axios({
     method: 'post',
     url: `${baseURL}/news/edit`,
     headers: {
       Authorization: 'Bearer ' + token,
+      'Content-Type': 'multipart/form-data',
     },
-    data: {
-      title: title,
-      description: description,
-      id: id,
-    },
+    data: formData,
   })
 }
 const addService = (

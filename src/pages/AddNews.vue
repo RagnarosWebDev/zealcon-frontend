@@ -21,10 +21,14 @@ export default {
         this.title,
         this.description,
         this.file,
-      ).then((e) => {
-        useToast().success('Успешно добавлено')
-        router.push({ path: '/addNews' })
-      })
+      )
+        .then((e) => {
+          useToast().success('Успешно добавлено')
+          router.push({ path: '/addNews' })
+        })
+        .catch((e) => {
+          useToast().error(e.response.data.message)
+        })
     },
     uploadFile: function (event) {
       this.file = event.target.files[0]

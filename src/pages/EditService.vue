@@ -14,6 +14,8 @@ export default defineComponent({
       title: '',
       advantages: new Array<Ref>(),
       text: '',
+      file: null,
+      fileMobile: null,
     }
   },
   methods: {
@@ -24,12 +26,24 @@ export default defineComponent({
         this.advantages.map((u) => u.value),
         this.text,
         this.id,
-      ).then((e) => {
-        useToast().success('Успешно отредактировано')
-      })
+        this.file,
+        this.fileMobile,
+      )
+        .then((e) => {
+          useToast().success('Успешно отредактировано')
+        })
+        .catch((e) => {
+          useToast().error(e.response.data.message)
+        })
     },
     add() {
       this.advantages.push(ref(''))
+    },
+    uploadFile: function (event) {
+      this.file = event.target.files[0]
+    },
+    uploadMobileFile: function (event) {
+      this.fileMobile = event.target.files[0]
     },
   },
   mounted() {
@@ -90,6 +104,13 @@ export default defineComponent({
       name="text"
       placeholder="Введите текст"
     ></textarea>
+    <input type="file" @change="uploadFile" id="image" placeholder="Картинка" />
+    <input
+      type="file"
+      @change="uploadMobileFile"
+      id="image1"
+      placeholder="Картинка"
+    />
     <input type="submit" placeholder="Создать" @click="editData" />
   </div>
 </template>

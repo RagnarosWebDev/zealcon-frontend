@@ -29,13 +29,17 @@ export default {
     }
   },
   mounted() {
-    allLangs().then((e: AxiosResponse<LangItem[]>) => {
-      for (const u of e.data) {
-        this.langs.push(
-          new LangItemRef(u.id, u.name, u.russianName, ref(u.value)),
-        )
-      }
-    })
+    allLangs()
+      .then((e: AxiosResponse<LangItem[]>) => {
+        for (const u of e.data) {
+          this.langs.push(
+            new LangItemRef(u.id, u.name, u.russianName, ref(u.value)),
+          )
+        }
+      })
+      .catch((e) => {
+        useToast().error(e.response.data.message)
+      })
   },
   methods: {
     update(id: number) {

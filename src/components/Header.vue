@@ -42,7 +42,7 @@ export default {
         class="contact-visible"
         :value="langs.phone1.value"
         image="/phone.svg"
-        link="tel:+74055404977"
+        link="tel:+74955404977"
       />
       <ContactItem
         class="contact-visible"
@@ -91,7 +91,7 @@ export default {
         class="contact-data"
         :value="langs.phone1.value"
         image="/phone.svg"
-        link="tel:+74055404977"
+        link="tel:+74955404977"
         color="#ECECEC"
       />
       <ContactItem

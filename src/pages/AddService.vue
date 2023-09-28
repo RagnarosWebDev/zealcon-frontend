@@ -30,10 +30,14 @@ export default {
         this.advantages,
         this.text,
         this.fileMobile,
-      ).then((e) => {
-        useToast().success('Успешно добавлено')
-        router.push({ path: '/addService' })
-      })
+      )
+        .then((e) => {
+          useToast().success('Успешно добавлено')
+          router.push({ path: '/addService' })
+        })
+        .catch((e) => {
+          useToast().error(e.response.data.message)
+        })
     },
     uploadFile: function (event) {
       this.file = event.target.files[0]

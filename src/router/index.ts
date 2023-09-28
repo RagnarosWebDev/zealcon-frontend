@@ -12,6 +12,7 @@ import ListForms from '../pages/ListForms.vue'
 import EditLangPage from '../pages/EditLangPage.vue'
 import EditService from '../pages/EditService.vue'
 import EditNewsPage from '../pages/EditNewsPage.vue'
+import ThanksPage from '../pages/ThanksPage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -78,6 +79,11 @@ const routes: RouteRecordRaw[] = [
     path: '/editNews',
     name: 'editNews',
     component: EditNewsPage,
+  },
+  {
+    path: '/thanks',
+    name: 'Thanks',
+    component: ThanksPage,
   },
 ]
 

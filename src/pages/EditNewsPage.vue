@@ -10,6 +10,7 @@ export default defineComponent({
     return {
       id: Number(useRoute().query.id),
       title: '',
+      file: null,
       description: '',
     }
   },
@@ -20,13 +21,20 @@ export default defineComponent({
         this.title,
         this.description,
         this.id,
-      ).then((e) => {
-        useToast().success('Успешно отредактировано')
-      })
+        this.file,
+      )
+        .then((e) => {
+          useToast().success('Успешно отредактировано')
+        })
+        .catch((e) => {
+          useToast().error(e.response.data.message)
+        })
+    },
+    uploadFile: function (event) {
+      this.file = event.target.files[0]
     },
   },
   mounted() {
-    console.log(this.id)
     getById(useUserStore().token, this.id).then((e) => {
       this.title = e.data.title
       this.description = e.data.description
@@ -47,7 +55,7 @@ export default defineComponent({
       flex-direction: column;
     "
   >
-    <input type="text" v-model="title" placeholder="Заголовок" name="title" />\
+    <input type="text" v-model="title" placeholder="Заголовок" name="title" />
     <textarea
       rows="5"
       cols="100"
@@ -55,6 +63,7 @@ export default defineComponent({
       name="text"
       placeholder="Введите текст"
     ></textarea>
+    <input type="file" @change="uploadFile" id="image" placeholder="Картинка" />
     <input type="submit" placeholder="Сохранить" @click="editData" />
   </div>
 </template>

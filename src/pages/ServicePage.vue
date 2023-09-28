@@ -189,11 +189,10 @@ export default {
 @media (max-width: 800px) {
   .text {
     font-size: 16px;
-    text-align: center;
   }
   .title {
     font-size: 28px;
-    text-align: center;
+    margin-left: 12%;
     width: 90%;
   }
 }

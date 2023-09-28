@@ -6,11 +6,25 @@ import { useLanguage } from '../storage/language.storage.ts'
 const langs = storeToRefs(useLanguage())
 </script>
 <script lang="ts">
+import { router } from '../router'
+
 export default {
   name: 'FooterD',
   methods: {
-    toForm() {
-      document.getElementById('form')?.scrollIntoView({
+    async toForm() {
+      const scroll = document.getElementById('form')
+      if (!scroll) {
+        await router.push({
+          path: '/',
+        })
+
+        return setTimeout(() => {
+          document.getElementById('form')?.scrollIntoView({
+            behavior: 'smooth',
+          })
+        }, 400)
+      }
+      scroll?.scrollIntoView({
         behavior: 'smooth',
       })
     },
@@ -57,7 +71,7 @@ export default {
           <ContactItem
             :value="langs.phone1.value"
             image="/phone.svg"
-            link="tel:+74055404977"
+            link="tel:+74955404977"
             color="white"
           />
           <ContactItem

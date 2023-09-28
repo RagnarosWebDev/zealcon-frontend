@@ -36,6 +36,10 @@ export default {
         this.news.length >= 4 ? 4 : this.news.length,
       )
     },
+    text(data: NewsData) {
+      if (data.description.length < 150) return data.description
+      return data.description.substring(0, 150) + '...'
+    },
   },
   created() {
     window.addEventListener('resize', () => {
@@ -48,11 +52,14 @@ export default {
 <template>
   <div style="padding-top: 40px">
     <div class="news-preview" v-if="first() && width > 800">
-      <div
+      <a
         class="news-container"
         :style="{
           'background-image': `url('${baseURL}/images/${first().image}')`,
+          cursor: 'pointer',
+          textDecoration: 'none',
         }"
+        href="/news?page=0"
         v-if="width > 1500"
       >
         <div class="news-gradient">
@@ -66,18 +73,26 @@ export default {
             </div>
           </div>
           <div class="title-news">{{ first().title }}</div>
-          <div class="description-news">{{ first().description }}</div>
+          <div class="description-news">{{ text(first()) }}</div>
         </div>
-      </div>
+      </a>
       <div class="news-container">
-        <div
+        <a
           class="news-item"
           v-for="newsItem in fourthOrMax()"
+          :href="'/news?page=' + (fourthOrMax().indexOf(newsItem) + 1)"
+          :style="{
+            cursor: 'pointer',
+            color: 'black',
+            textDecoration: 'none',
+          }"
           :key="newsItem.id"
         >
           <div class="texts-news-item">
             <div class="title-news-item">{{ newsItem.title }}</div>
-            <div class="description-news-item">{{ newsItem.description }}</div>
+            <div class="description-news-item">
+              {{ newsItem.description }}
+            </div>
             <div class="news-date" style="margin-top: auto">
               <div
                 class="rounder"
@@ -92,13 +107,15 @@ export default {
             </div>
           </div>
           <div class="grid-news">
-            <img
+            <div
               class="image-news-item"
-              :src="`${baseURL}/images/${newsItem.image}`"
-            />
+              :style="{
+                background: `url(&quot;${baseURL}/images/${newsItem.image}&quot;) center center/cover no-repeat`,
+              }"
+            ></div>
             <div class="bg-image-news"></div>
           </div>
-        </div>
+        </a>
 
         <router-link class="full" to="/news">Полный список</router-link>
       </div>
@@ -110,8 +127,21 @@ export default {
     >
       <div style="width: 100%; margin-bottom: 20px">
         <swiper :slides-per-view="1.5" space-between="0">
-          <swiper-slide v-for="item in fourthOrMax()" :key="item.id">
-            <div class="swiper-news-container" style="margin-left: 20px">
+          <swiper-slide
+            v-for="item in fourthOrMax()"
+            :key="item.id"
+            style="cursor: pointer"
+          >
+            <a
+              class="swiper-news-container"
+              style="
+                margin-left: 20px;
+                display: block;
+                text-decoration: none;
+                color: black;
+              "
+              :href="'/news?page=' + fourthOrMax().indexOf(item)"
+            >
               <div
                 style="
                   border-radius: 12px;
@@ -120,9 +150,9 @@ export default {
                   background-size: cover;
                 "
                 :style="{
-                  'background-image': `url('${baseURL}/images/${
-                    first().image
-                  }')`,
+                  'background-image': `url('${baseURL}/images/${item.image}')`,
+                  textDecoration: 'none',
+                  color: 'black',
                 }"
               >
                 <div
@@ -141,8 +171,8 @@ export default {
 
               <div class="swiper-news-texts">{{ item.title }}</div>
 
-              <div class="swiper-news-description">{{ item.description }}</div>
-            </div>
+              <div class="swiper-news-description">{{ text(item) }}</div>
+            </a>
           </swiper-slide>
         </swiper>
       </div>
@@ -187,11 +217,20 @@ export default {
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 20px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 .description-news-item {
   font-size: 20px;
   color: #2b2b2b;
   font-weight: 400;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 .grid-news {
   display: grid;
@@ -209,6 +248,7 @@ export default {
 .texts-news-item {
   flex: 1;
   display: flex;
+  margin-right: 30px;
   flex-direction: column;
 }
 .image-news-item {

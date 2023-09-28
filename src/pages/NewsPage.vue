@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { NewsData } from '../core/models/news-data.ts'
 import { baseURL } from '../core/api'
+import { NewsData } from '../core/models/news-data.ts'
 </script>
 
 <script lang="ts">
@@ -8,6 +8,7 @@ import { allNews, countNews, deleteNews } from '../core/api'
 import { useToast } from 'vue-toastification'
 import { useUserStore } from '../storage/user.storage.ts'
 import { router } from '../router'
+import { useRoute } from 'vue-router'
 
 export default {
   name: 'NewsData',
@@ -19,9 +20,16 @@ export default {
     }
   },
   mounted() {
+    const pageId = useRoute().query.page + ''
     this.changePage(1)
     countNews().then((e) => {
       this.countPages = e.data.count
+
+      setTimeout(() => {
+        console.log(pageId)
+        if (!pageId) return
+        document.getElementById(pageId)?.scrollIntoView({})
+      }, 300)
     })
   },
   methods: {
@@ -65,15 +73,20 @@ export default {
   <div class="container">
     <div class="title">Новости</div>
 
-    <div class="news-container" v-for="item in items" :key="item.id">
+    <div
+      class="news-container"
+      v-for="item in items"
+      :key="item.id"
+      :style="{
+        scrollMarginTop: '80px',
+      }"
+      :id="items.indexOf(item) + ''"
+    >
       <div class="flex">
-        <div class="news-texts">
-          <div class="news-title">{{ item.title }}</div>
-          <div class="news-description">{{ item.description }}</div>
-        </div>
         <div
           class="news-image"
           :style="{
+            float: 'right',
             'background-image': `url('${baseURL}/images/${item.image}')`,
           }"
         >
@@ -112,6 +125,9 @@ export default {
             </div>
           </div>
         </div>
+
+        <div class="news-title">{{ item.title }}</div>
+        <div class="news-description">{{ item.description }}</div>
       </div>
 
       <div class="line" v-if="item != items[items.length - 1]"></div>
@@ -140,9 +156,6 @@ export default {
   font-weight: 500;
   margin-left: 10px;
 }
-.flex {
-  display: flex;
-}
 .news-title {
   font-size: 40px;
   font-weight: 500;
@@ -153,8 +166,8 @@ export default {
   font-weight: 300;
 }
 .linear {
-  width: inherit;
   height: inherit;
+  width: 100%;
   background: linear-gradient(
     360deg,
     rgba(0, 0, 0, 0.64) 0%,
@@ -175,12 +188,14 @@ export default {
 }
 .news-container {
   display: flex;
+  cursor: pointer;
   flex-direction: column;
 }
 .news-texts {
   flex: 1;
 }
 .news-image {
+  width: 50%;
   border-radius: 12px;
   flex: 1;
   background-size: cover;
@@ -206,10 +221,14 @@ export default {
 .pages-item:last-child {
   margin-right: 20px;
 }
+.pages-item:hover {
+  cursor: pointer;
+}
 
 @media (max-width: 900px) {
   .flex {
-    flex-direction: column-reverse;
+    display: flex;
+    flex-direction: column;
   }
   .news-texts {
     margin-top: 10px;
@@ -223,6 +242,7 @@ export default {
   }
   .news-image {
     height: 200px;
+    width: 100%;
   }
   .pages {
     margin-left: auto;

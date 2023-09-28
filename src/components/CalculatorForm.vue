@@ -7,6 +7,7 @@ const langs = storeToRefs(useLanguage())
 <script lang="ts">
 import { addForm } from '../core/api'
 import { useToast } from 'vue-toastification'
+import { router } from '../router'
 
 export default {
   name: 'CalculatorForm',
@@ -14,7 +15,19 @@ export default {
     return this.init()
   },
   methods: {
+    isEmptyOrSpaces(str) {
+      return !str || str.trim() === ''
+    },
     add() {
+      eval("ym(94352715, 'reachGoal', 'raschet'); console.log('asd')")
+      if (
+        this.isEmptyOrSpaces(this.fio) ||
+        this.isEmptyOrSpaces(this.email) ||
+        !this.email.includes('@') ||
+        this.email.length < 4
+      ) {
+        return useToast().error('Не все поля заполнены')
+      }
       addForm({
         code: this.code,
         countryExport: this.country,
@@ -29,7 +42,9 @@ export default {
         const data = this.init()
         Object.keys(data).forEach((k) => (this[k] = data[k]))
 
-        useToast().success('Ваше заявление принятно')
+        router.push({
+          path: '/thanks',
+        })
       })
     },
     init() {
